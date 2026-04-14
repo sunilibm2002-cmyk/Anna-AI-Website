@@ -1,0 +1,51 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  CSS variables drive light/dark themes.
+  Tailwind references rgb(var(--*) / <alpha-value>) in tailwind.config.ts.
+*/
+:root {
+  --surface: 248 250 252;
+  --surface-elevated: 255 255 255;
+  --foreground: 15 23 42;
+  --muted: 100 116 139;
+  --border: 226 232 240;
+  --accent-blue: 14 165 233;
+  --accent-purple: 168 85 247;
+  --glass-bg: 255 255 255 / 0.65;
+  --glass-border: 255 255 255 / 0.35;
+}
+
+.dark {
+  --surface: 3 7 18;
+  --surface-elevated: 15 23 42;
+  --foreground: 241 245 249;
+  --muted: 148 163 184;
+  --border: 51 65 85;
+  --accent-blue: 56 189 248;
+  --accent-purple: 192 132 252;
+  --glass-bg: 15 23 42 / 0.55;
+  --glass-border: 148 163 184 / 0.12;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface text-slate-900 antialiased transition-colors duration-300;
+  color: rgb(var(--foreground));
+  background-color: rgb(var(--surface));
+}
+
+.dark body {
+  @apply text-slate-100;
+}
+
+/* Focus rings for accessibility */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-sky-500;
+}
+
