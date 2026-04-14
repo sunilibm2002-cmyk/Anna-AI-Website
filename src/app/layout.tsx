@@ -23,11 +23,11 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://anna-ai-automation.vercel.app"),
   title: {
-    default: "Anna AI Automation | Enterprise AI and Workflow Automation",
+    default: " Anna AI Automation",
     template: "%s | Anna AI Automation",
   },
   description:
-    "AI-driven automation for DSPS, enterprise agents, workflow orchestration, and SAP, Oracle, Dynamics integrations. Book a demo.",
+    "Explore Jordan Rivera's UX design portfolio : case studies, skills, and contact information.",
   keywords: [
     "AI automation",
     "DSPS",
