@@ -1,9 +1,10 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from "react";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = Omit<HTMLMotionProps<"button">, "ref"> & {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "inverted";
 };
