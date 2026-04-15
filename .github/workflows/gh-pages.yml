@@ -34,8 +34,21 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            await github.rest.repos.createPagesSite({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              source: { branch: 'gh-pages', path: '/' }
-            });
+            try {
+              await github.rest.repos.createPagesSite({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                source: { branch: 'gh-pages', path: '/' }
+              });
+            } catch (error) {
+              if (error.status === 422) {
+                // Site already exists, update it
+                await github.rest.repos.updateInformationAboutPagesSite({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  source: { branch: 'gh-pages', path: '/' }
+                });
+              } else {
+                throw error;
+              }
+            }
