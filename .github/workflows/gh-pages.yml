@@ -35,20 +35,16 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const payload = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              source: { branch: 'gh-pages', path: '/' }
+            };
             try {
-              await github.rest.pages.createPagesSite({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                source: { branch: 'gh-pages', path: '/' }
-              });
+              await github.request('POST /repos/{owner}/{repo}/pages', payload);
             } catch (error) {
-              if (error.status === 422) {
-                // Site already exists, update it
-                await github.rest.pages.updatePagesSite({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  source: { branch: 'gh-pages', path: '/' }
-                });
+              if (error.status === 409 || error.status === 422) {
+                await github.request('PUT /repos/{owner}/{repo}/pages', payload);
               } else {
                 throw error;
               }
