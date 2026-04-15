@@ -35,7 +35,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             try {
-              await github.rest.repos.createPagesSite({
+              await github.rest.pages.createPagesSite({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 source: { branch: 'gh-pages', path: '/' }
@@ -43,7 +43,7 @@ jobs:
             } catch (error) {
               if (error.status === 422) {
                 // Site already exists, update it
-                await github.rest.repos.updateInformationAboutPagesSite({
+                await github.rest.pages.updatePagesSite({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   source: { branch: 'gh-pages', path: '/' }
