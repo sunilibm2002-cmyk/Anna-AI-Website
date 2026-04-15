@@ -1,0 +1,13 @@
+name: Debug Actions Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a simple check
+        run: echo "Actions runner is working"
